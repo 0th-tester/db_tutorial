@@ -4,7 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <unistd.h>
+// typedef __int32 int32_t;
+// typedef unsigned __int32 uint32_t;
 
 struct InputBuffer_t {
   char* buffer;
@@ -38,8 +41,12 @@ typedef enum PrepareResult_t PrepareResult;
 enum StatementType_t { STATEMENT_INSERT, STATEMENT_SELECT };
 typedef enum StatementType_t StatementType;
 
-const uint32_t COLUMN_USERNAME_SIZE = 32;
-const uint32_t COLUMN_EMAIL_SIZE = 255;
+enum COLUMN {
+   COLUMN_USERNAME_SIZE = 32,
+   COLUMN_EMAIL_SIZE = 255
+};
+// const uint32_t COLUMN_USERNAME_SIZE = 32;
+// const uint32_t COLUMN_EMAIL_SIZE = 255;
 struct Row_t {
   uint32_t id;
   char username[COLUMN_USERNAME_SIZE + 1];
@@ -64,7 +71,8 @@ const uint32_t EMAIL_OFFSET = USERNAME_OFFSET + USERNAME_SIZE;
 const uint32_t ROW_SIZE = ID_SIZE + USERNAME_SIZE + EMAIL_SIZE;
 
 const uint32_t PAGE_SIZE = 4096;
-const uint32_t TABLE_MAX_PAGES = 100;
+#define TABLE_MAX_PAGES 100
+// const uint32_t TABLE_MAX_PAGES = 100;
 
 struct Pager_t {
   int file_descriptor;
