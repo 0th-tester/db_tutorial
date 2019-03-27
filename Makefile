@@ -1,5 +1,6 @@
+CC=gcc-8
 db: db.c
-	gcc db.c -o db
+	$(CC) -Wall db.c -o db
 
 run: db
 	./db mydb.db
@@ -8,7 +9,11 @@ clean:
 	rm -f db *.db
 
 test: db
-	bundle exec rspec
+	rspec ./spec/main_spec.rb
+	#bundle exec rspec
+
+debug: db.c
+	$(CC) -g -Wall db.c -o db
 
 format: *.c
 	clang-format -style=Google -i *.c
